@@ -1,0 +1,18 @@
+
+
+import UIKit
+
+
+class HomeVC : UIViewController {
+    var screanfunction: ScreanFunc!
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        screanfunction = ScreanFunc(VC:self)
+        
+        
+        
+        
+    }
+    
+}
