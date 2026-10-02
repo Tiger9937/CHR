@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="25249" systemVersion="26A428" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithSwiftData="YES" userDefinedModelVersionIdentifier="">
+    <entity name="Chats" representedClassName="Chats" syncable="YES">
+        <attribute name="id_" optional="YES" attributeType="String"/>
+        <attribute name="text" optional="YES" attributeType="String"/>
+        <relationship name="oneperson" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Person" inverseName="allchats" inverseEntity="Person"/>
+    </entity>
+    <entity name="DataEntity" representedClassName="DataEntity" syncable="YES">
+        <attribute name="id_" optional="YES" attributeType="String"/>
+        <attribute name="sectionName" optional="YES" attributeType="String"/>
+        <attribute name="userName" optional="YES" attributeType="String"/>
+        <relationship name="items" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="KeyValueEntity" inverseName="address" inverseEntity="KeyValueEntity"/>
+    </entity>
+    <entity name="KeyValueEntity" representedClassName="KeyValueEntity" syncable="YES">
+        <attribute name="key" optional="YES" attributeType="String"/>
+        <attribute name="value" optional="YES" attributeType="String"/>
+        <relationship name="address" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="DataEntity" inverseName="items" inverseEntity="DataEntity"/>
+    </entity>
+    <entity name="Person" representedClassName="Person" syncable="YES">
+        <attribute name="id_" optional="YES" attributeType="String"/>
+        <attribute name="is_person_viewed" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="last_model_update" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="last_sms_date" optional="YES" attributeType="String"/>
+        <attribute name="last_update_sms" optional="YES" attributeType="String"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <attribute name="profile_img" optional="YES" attributeType="String"/>
+        <attribute name="unseen_smses" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="user_id" optional="YES" attributeType="String"/>
+        <relationship name="allchats" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Chats" inverseName="oneperson" inverseEntity="Chats"/>
+    </entity>
+</model>

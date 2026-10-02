@@ -1,0 +1,12 @@
+import UIKit
+
+
+class ShapFunc {
+    var VC : UIViewController
+    
+    init(VC: UIViewController) {
+        self.VC = VC
+    }
+    
+}
+
