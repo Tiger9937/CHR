@@ -28,3 +28,9 @@ enum StatusDispatch: String, Decodable{
     case panding
     case notdelaverd
 }
+
+enum MessageDirection: Int16 {
+    case incoming = 0
+    case outgoing = 1
+}
+

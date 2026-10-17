@@ -7,14 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		79B9677E306DFDE600437A68 /* Person+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79B9677C306DFDE600437A68 /* Person+CoreDataClass.swift */; };
-		79B9677F306DFDE600437A68 /* Chats+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79B96776306DFDE600437A68 /* Chats+CoreDataClass.swift */; };
-		79B96780306DFDE600437A68 /* DataEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79B96778306DFDE600437A68 /* DataEntity+CoreDataClass.swift */; };
-		79B96781306DFDE600437A68 /* DataEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79B96779306DFDE600437A68 /* DataEntity+CoreDataProperties.swift */; };
-		79B96782306DFDE600437A68 /* KeyValueEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79B9677A306DFDE600437A68 /* KeyValueEntity+CoreDataClass.swift */; };
-		79B96783306DFDE600437A68 /* KeyValueEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79B9677B306DFDE600437A68 /* KeyValueEntity+CoreDataProperties.swift */; };
-		79B96784306DFDE600437A68 /* Person+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79B9677D306DFDE600437A68 /* Person+CoreDataProperties.swift */; };
-		79B96785306DFDE600437A68 /* Chats+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79B96777306DFDE600437A68 /* Chats+CoreDataProperties.swift */; };
+		79A38F49308340BD00829B96 /* KeyValueEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79A38F45308340BD00829B96 /* KeyValueEntity+CoreDataClass.swift */; };
+		79A38F4A308340BD00829B96 /* Chats+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79A38F42308340BD00829B96 /* Chats+CoreDataProperties.swift */; };
+		79A38F4B308340BD00829B96 /* DataEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79A38F43308340BD00829B96 /* DataEntity+CoreDataClass.swift */; };
+		79A38F4C308340BD00829B96 /* Chats+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79A38F41308340BD00829B96 /* Chats+CoreDataClass.swift */; };
+		79A38F4D308340BD00829B96 /* KeyValueEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79A38F46308340BD00829B96 /* KeyValueEntity+CoreDataProperties.swift */; };
+		79A38F4E308340BD00829B96 /* Person+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79A38F47308340BD00829B96 /* Person+CoreDataClass.swift */; };
+		79A38F4F308340BD00829B96 /* DataEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79A38F44308340BD00829B96 /* DataEntity+CoreDataProperties.swift */; };
+		79A38F50308340BD00829B96 /* Person+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79A38F48308340BD00829B96 /* Person+CoreDataProperties.swift */; };
+		79FADAB3307DA3850073B65F /* SocketIO in Frameworks */ = {isa = PBXBuildFile; productRef = 79FADAB2307DA3850073B65F /* SocketIO */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -41,14 +42,14 @@
 		7971C55D2F99B1F70069DA6E /* CHR.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = CHR.xcodeproj; path = CHR/CHR.xcodeproj; sourceTree = SOURCE_ROOT; };
 		7971C5AC2F99C44E0069DA6E /* CHR.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = CHR.xcodeproj; sourceTree = "<group>"; };
 		7971C6002F99C4690069DA6E /* CHR.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = CHR.xcodeproj; sourceTree = "<group>"; };
-		79B96776306DFDE600437A68 /* Chats+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Chats+CoreDataClass.swift"; sourceTree = "<group>"; };
-		79B96777306DFDE600437A68 /* Chats+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Chats+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		79B96778306DFDE600437A68 /* DataEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DataEntity+CoreDataClass.swift"; sourceTree = "<group>"; };
-		79B96779306DFDE600437A68 /* DataEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DataEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		79B9677A306DFDE600437A68 /* KeyValueEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "KeyValueEntity+CoreDataClass.swift"; sourceTree = "<group>"; };
-		79B9677B306DFDE600437A68 /* KeyValueEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "KeyValueEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		79B9677C306DFDE600437A68 /* Person+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Person+CoreDataClass.swift"; sourceTree = "<group>"; };
-		79B9677D306DFDE600437A68 /* Person+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Person+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		79A38F41308340BD00829B96 /* Chats+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Chats+CoreDataClass.swift"; sourceTree = "<group>"; };
+		79A38F42308340BD00829B96 /* Chats+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Chats+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		79A38F43308340BD00829B96 /* DataEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DataEntity+CoreDataClass.swift"; sourceTree = "<group>"; };
+		79A38F44308340BD00829B96 /* DataEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DataEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		79A38F45308340BD00829B96 /* KeyValueEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "KeyValueEntity+CoreDataClass.swift"; sourceTree = "<group>"; };
+		79A38F46308340BD00829B96 /* KeyValueEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "KeyValueEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		79A38F47308340BD00829B96 /* Person+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Person+CoreDataClass.swift"; sourceTree = "<group>"; };
+		79A38F48308340BD00829B96 /* Person+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Person+CoreDataProperties.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -99,6 +100,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				79FADAB3307DA3850073B65F /* SocketIO in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -122,19 +124,20 @@
 		79380E262F85753700116ACD = {
 			isa = PBXGroup;
 			children = (
-				79B96776306DFDE600437A68 /* Chats+CoreDataClass.swift */,
-				79B96777306DFDE600437A68 /* Chats+CoreDataProperties.swift */,
-				79B96778306DFDE600437A68 /* DataEntity+CoreDataClass.swift */,
-				79B96779306DFDE600437A68 /* DataEntity+CoreDataProperties.swift */,
-				79B9677A306DFDE600437A68 /* KeyValueEntity+CoreDataClass.swift */,
-				79B9677B306DFDE600437A68 /* KeyValueEntity+CoreDataProperties.swift */,
-				79B9677C306DFDE600437A68 /* Person+CoreDataClass.swift */,
-				79B9677D306DFDE600437A68 /* Person+CoreDataProperties.swift */,
+				79A38F41308340BD00829B96 /* Chats+CoreDataClass.swift */,
+				79A38F42308340BD00829B96 /* Chats+CoreDataProperties.swift */,
+				79A38F43308340BD00829B96 /* DataEntity+CoreDataClass.swift */,
+				79A38F44308340BD00829B96 /* DataEntity+CoreDataProperties.swift */,
+				79A38F45308340BD00829B96 /* KeyValueEntity+CoreDataClass.swift */,
+				79A38F46308340BD00829B96 /* KeyValueEntity+CoreDataProperties.swift */,
+				79A38F47308340BD00829B96 /* Person+CoreDataClass.swift */,
+				79A38F48308340BD00829B96 /* Person+CoreDataProperties.swift */,
 				798944B8305D50FA004199FD /* CHR */,
 				79380E4B2F85753A00116ACD /* CHRTests */,
 				79380E552F85753A00116ACD /* CHRUITests */,
 				79380E302F85753700116ACD /* Products */,
 				7989436F3059D5A3004199FD /* Recovered References */,
+				79FADAB1307DA3850073B65F /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -179,6 +182,13 @@
 			name = "Recovered References";
 			sourceTree = "<group>";
 		};
+		79FADAB1307DA3850073B65F /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -199,6 +209,7 @@
 			);
 			name = CHR;
 			packageProductDependencies = (
+				79FADAB2307DA3850073B65F /* SocketIO */,
 			);
 			productName = CHR;
 			productReference = 79380E2F2F85753700116ACD /* CHR.app */;
@@ -282,6 +293,9 @@
 			);
 			mainGroup = 79380E262F85753700116ACD;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				79FADAB0307DA2FE0073B65F /* XCRemoteSwiftPackageReference "socket.io-client-swift" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 79380E302F85753700116ACD /* Products */;
 			projectDirPath = "";
@@ -337,14 +351,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				79B9677E306DFDE600437A68 /* Person+CoreDataClass.swift in Sources */,
-				79B9677F306DFDE600437A68 /* Chats+CoreDataClass.swift in Sources */,
-				79B96780306DFDE600437A68 /* DataEntity+CoreDataClass.swift in Sources */,
-				79B96781306DFDE600437A68 /* DataEntity+CoreDataProperties.swift in Sources */,
-				79B96782306DFDE600437A68 /* KeyValueEntity+CoreDataClass.swift in Sources */,
-				79B96783306DFDE600437A68 /* KeyValueEntity+CoreDataProperties.swift in Sources */,
-				79B96784306DFDE600437A68 /* Person+CoreDataProperties.swift in Sources */,
-				79B96785306DFDE600437A68 /* Chats+CoreDataProperties.swift in Sources */,
+				79A38F49308340BD00829B96 /* KeyValueEntity+CoreDataClass.swift in Sources */,
+				79A38F4A308340BD00829B96 /* Chats+CoreDataProperties.swift in Sources */,
+				79A38F4B308340BD00829B96 /* DataEntity+CoreDataClass.swift in Sources */,
+				79A38F4C308340BD00829B96 /* Chats+CoreDataClass.swift in Sources */,
+				79A38F4D308340BD00829B96 /* KeyValueEntity+CoreDataProperties.swift in Sources */,
+				79A38F4E308340BD00829B96 /* Person+CoreDataClass.swift in Sources */,
+				79A38F4F308340BD00829B96 /* DataEntity+CoreDataProperties.swift in Sources */,
+				79A38F50308340BD00829B96 /* Person+CoreDataProperties.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -683,6 +697,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		79FADAB0307DA2FE0073B65F /* XCRemoteSwiftPackageReference "socket.io-client-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/socketio/socket.io-client-swift.git";
+			requirement = {
+				kind = upToNextMinorVersion;
+				minimumVersion = 16.1.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		79FADAB2307DA3850073B65F /* SocketIO */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 79FADAB0307DA2FE0073B65F /* XCRemoteSwiftPackageReference "socket.io-client-swift" */;
+			productName = SocketIO;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 79380E272F85753700116ACD /* Project object */;
 }

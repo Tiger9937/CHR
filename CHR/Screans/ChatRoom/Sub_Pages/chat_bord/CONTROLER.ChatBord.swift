@@ -18,6 +18,8 @@ class CHATBOARD: UIViewController {
     let LYT = chatBoard_LYTS()
     let internetcall                = INTERNET()
     let refreshControl              = UIRefreshControl()
+    let LocalServer                 = SMS_Serv()
+    // let User_id:String usr_98312 , usr_98612
     
     override func viewDidLoad() {
         APPCOLOR.CurrentThem()
@@ -26,6 +28,9 @@ class CHATBOARD: UIViewController {
         view.backgroundColor = APPCOLOR.BackgroundColor
         view.addSubview(LYT.USER_BNNER_LYT)
         view.addSubview(scrollLayout)
+        
+        
+        SocketService.shared.connect()
         
         Auto_Page_Sizing()
         HaderView()
@@ -73,7 +78,8 @@ class CHATBOARD: UIViewController {
             Username: "LUX_ben",
             ProfileImg: UIImage(named: "NoIMG") ?? UIImage(),
             CurrentStatus: "online"
-        ))
+        ),Onclick: {
+        })
         
         banner.translatesAutoresizingMaskIntoConstraints = false
         LYT.USER_BNNER_LYT.addSubview(banner)
@@ -177,49 +183,74 @@ class CHATBOARD: UIViewController {
     }
     
     func main() {
-
         let stack = LYT.ALLCHATS_LYT
+        // this can show all the upcoming SMSes
+        // structure the messages
         
-        let sampleTexts = [
-            "Hey, are you free this evening?",
-            "Just finished the login screen, it's working now.",
-            "Can you send me the design files when you get a chance?",
-            "Lunch at 2? I'm craving biryani.",
-            "The build failed again. Looks like a missing constraint.",
-            "Happy birthday! Hope you have an amazing day.",
-            "I'll call you in 10 minutes, I'm stuck in traffic right now and the signal keeps dropping.",
-            "Did you see the new iOS update? Some of the animations feel much smoother.",
-            "Okay, sounds good.",
-            "Let's meet tomorrow morning to go over the project plan, the deadline is closer than we thought, so we should split the tasks today."
-        ]
-
-        func randomDateString() -> String {
-            let day = Int.random(in: 1...28)
-            let month = Int.random(in: 1...12)
-            let year = Int.random(in: 2020...2026)
-            return String(format: "%02d/%02d/%d", day, month, year)
-        }
-
-        for _ in 0..<5 {
+        SocketService.shared.listenMessagesFor_A_User(OnMessageReturn: { usermessage,timeing  in
             let leftrow = USER_CHATBOARD_TEXTFILD_ONGOING_CNT(
-                data: .init(UserTextView: sampleTexts.randomElement()!,
-                            UserTextTimeView: randomDateString())
+                data: .init(UserTextView: usermessage,
+                            UserTextTimeView: TimeDetectr().FindCurrentTime(timeing,DateWithDateFormat: nil)!
+                           )
             )
-
-            let rightrow = USER_CHATBOARD_TEXTFILD_UPCOMING_CNT(
-                data: .init(UserTextView: sampleTexts.randomElement()!,
-                            UserTextTimeView: randomDateString(),
-                            UserTextDispatchStatus: .delaverd)
-            )
-
-            [leftrow, rightrow].forEach {
-                $0.translatesAutoresizingMaskIntoConstraints = false
-                stack.addArrangedSubview($0)   // left first, then right
-            }
-        }
+            stack.addArrangedSubview(leftrow)
+            
+            // "usr_98312"
+        
+            self.LocalServer.addUpcomigMessages(SMS:usermessage ,
+                                           time: timeing,
+                                           SMS_Direction: .incoming,
+                                           Personid: "usr_98312")
+        })
         
         
-        // let Activity = LYT.ACTIVITY_LYT
+       
+        
+
+
+        
+        
+        
+//        let sampleTexts = [
+//            "Hey, are you free this evening?",
+//            "Just finished the login screen, it's working now.",
+//            "Can you send me the design files when you get a chance?",
+//            "Lunch at 2? I'm craving biryani.",
+//            "The build failed again. Looks like a missing constraint.",
+//            "Happy birthday! Hope you have an amazing day.",
+//            "I'll call you in 10 minutes, I'm stuck in traffic right now and the signal keeps dropping.",
+//            "Did you see the new iOS update? Some of the animations feel much smoother.",
+//            "Okay, sounds good.",
+//            "Let's meet tomorrow morning to go over the project plan, the deadline is closer than we thought, so we should split the tasks today."
+//        ]
+//
+//        func randomDateString() -> String {
+//            let day = Int.random(in: 1...28)
+//            let month = Int.random(in: 1...12)
+//            let year = Int.random(in: 2020...2026)
+//            return String(format: "%02d/%02d/%d", day, month, year)
+//        }
+//
+//        for _ in 0..<5 {
+//            let leftrow = USER_CHATBOARD_TEXTFILD_ONGOING_CNT(
+//                data: .init(UserTextView: sampleTexts.randomElement()!,
+//                            UserTextTimeView: randomDateString())
+//            )
+//
+
+//
+//            [leftrow, rightrow].forEach {
+//                $0.translatesAutoresizingMaskIntoConstraints = false
+//                stack.addArrangedSubview($0)
+//            }
+//        }
+        
+        // -> Respos Back system
+        
+        // -> Delaver if user senn it
+        // -> panding -> if user concted with interner / can is conc
+        // ->
+        
         let bar = USER_ACTIVITY_CNT(data: .init(Username: "Jagan", ProfileImg: UIImage(), CurrentStatus: ""))
         bar.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(bar)
@@ -231,7 +262,15 @@ class CHATBOARD: UIViewController {
             bar.bottomAnchor.constraint(equalTo: view.keyboardLayoutGuide.topAnchor, constant: -8),
         ])
 
-        bar.onSendTapped = { text in print("Send:", text) }
+        bar.onSendTapped = { text in
+            let rightrow = USER_CHATBOARD_TEXTFILD_UPCOMING_CNT(
+                data: .init(UserTextView: text,
+                            UserTextTimeView: TimeDetectr().FindCurrentTime(nil, DateWithDateFormat: Date())!,
+                            UserTextDispatchStatus: .panding)
+            )
+            stack.addArrangedSubview(rightrow)
+            SocketService.shared.SendMessageToOtherPerson(text, liveID: "C9_igPdVKpUR8GVVAAAH")
+        }
     }
     
     

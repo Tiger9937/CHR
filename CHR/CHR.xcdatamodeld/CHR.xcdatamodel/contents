@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="25249" systemVersion="26A428" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithSwiftData="YES" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="25249" systemVersion="26A434" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithSwiftData="YES" userDefinedModelVersionIdentifier="">
     <entity name="Chats" representedClassName="Chats" syncable="YES">
-        <attribute name="id_" optional="YES" attributeType="String"/>
+        <attribute name="dipatcher_status" optional="YES" attributeType="String"/>
+        <attribute name="id_" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="last_model_update" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="message_direction" optional="YES" attributeType="Integer 16" usesScalarValueType="YES"/>
         <attribute name="text" optional="YES" attributeType="String"/>
+        <attribute name="time_stamp" optional="YES" attributeType="String"/>
         <relationship name="oneperson" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Person" inverseName="allchats" inverseEntity="Person"/>
     </entity>
     <entity name="DataEntity" representedClassName="DataEntity" syncable="YES">

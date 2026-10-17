@@ -18,7 +18,7 @@ struct chatroom_LYTS {
 }
 
 @MainActor
-class ALLCHATS_LIST_VC: UIViewController {
+class ALLPERSON_LIST_VC: UIViewController {
     let CMPT = chatroom_CMPTS()
     let LYT = chatroom_LYTS()
     let internetcall                = INTERNET()
@@ -274,7 +274,7 @@ class ALLCHATS_LIST_VC: UIViewController {
         let ChatRoomUser = ChatRoomUser(
             data: .init(
                 Username: Username,
-                Time: timeDetect.FindCurrentTime(Time: Time)!,
+                Time: timeDetect.FindCurrentTime(Time, DateWithDateFormat: nil)!,
                 ProfileImg:profileImageDetector(path: avatar),
                 RecentSMS: RecentSMS,
                 NuberofUnseenSMS:String(NuberofUnseenSMS)

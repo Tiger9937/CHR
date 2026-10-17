@@ -5,16 +5,20 @@ class TimeDetectr{
     var calendar = Calendar.current
      
     
-    func FindCurrentTime(Time:String)->String?{
+    func FindCurrentTime(_ TimeWIthString:String? , DateWithDateFormat:Date?)->String?{
         let formatter = ISO8601DateFormatter()
+        formatter.formatOptions = [
+            .withInternetDateTime,
+            .withFractionalSeconds
+        ]
+        let timestamp = TimeWIthString ?? formatter.string(from: DateWithDateFormat!)
         
-
-        if let date = formatter.date(from: Time) {
+        // 2026-02-18T05:00:11.272+00:00
+        if let date = formatter.date(from: timestamp) {
             calendar.timeZone = TimeZone.current
             
             if(calendar.isDateInToday(date)){
-                
-                outComeDate.dateFormat = "hh/mm"
+                outComeDate.dateFormat = "hh:mm a"
                 return outComeDate.string(from: date)
                 
             }else if(calendar.isDateInYesterday(date)){

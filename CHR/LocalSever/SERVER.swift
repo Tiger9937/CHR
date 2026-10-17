@@ -63,3 +63,30 @@ class PERSON_Serv {
         personCRUD.PERSON_Model_Update( user_id: UserID, IspersonViewed: true )
     }
 }
+
+
+class SMS_Serv {
+    let person = PERSON_CRUD()
+    let StoreMessages = CHAT_CRUD()
+    
+    // Hear i wont personis becuse person can store multiple Message including Upcoming and outgoing
+    
+    func addUpcomigMessages(SMS:String , time:String , SMS_Direction:MessageDirection , Personid:String){
+        
+        guard let personData = person.PERSON_Model_Read(user_id: Personid) else {
+            print("Person not found")
+            return
+        }
+        
+        let SMS_store = StoreMessages.CHAT_Model_Create(id: UUID(),
+                                   Dipatcher_Status: "",
+                                   Last_Model_Update: Date(),
+                                   Message_Direction:SMS_Direction.rawValue ,
+                                   Message_Text: SMS,
+                                   Time_Stamp: time,
+                                   PersonId: personData
+        )
+        
+        print(SMS_store)
+    }
+}

@@ -28,10 +28,11 @@ class USER_BNNER_CNT: UIView {
     }
 
     // MARK: CNT Configur
-    func Configur(with Data: DataClass) {
+    func Configur(with Data: DataClass ) {
         VideoButton.isHidden = true
-        CallButton.isHidden = true
+        // CallButton.isHidden = true
         MoreButton.isHidden = true
+        
         
         
         ProfileImage.image = Data.ProfileImg
@@ -40,8 +41,9 @@ class USER_BNNER_CNT: UIView {
     }
 
     // MARK: Initialize Config
-    init(data: DataClass) {
+    init(data: DataClass , Onclick: (() -> Void)? = nil) {
         super.init(frame: .zero)
+        self.onCallTapped = Onclick
         setupViews()
         setupConstraints()
         Configur(with: data)

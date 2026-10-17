@@ -32,7 +32,7 @@ class DATABASEOPERATION{
                 print("chat is allrady ther")
                 return
             }else{
-                chat.id_ = id_
+                // chat.id_ = id_
                 chat.text = text
             }
             
