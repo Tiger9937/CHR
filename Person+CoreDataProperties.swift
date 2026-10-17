@@ -2,7 +2,7 @@
 //  Person+CoreDataProperties.swift
 //  CHR
 //
-//  Created by jagannath sahoo on 01/10/26.
+//  Created by jagannath sahoo on 17/10/26.
 //
 //
 
@@ -19,6 +19,7 @@ extension Person {
     }
 
     @NSManaged nonisolated public var id_: String?
+    @NSManaged nonisolated public var is_person_viewed: Bool
     @NSManaged nonisolated public var last_model_update: Date?
     @NSManaged nonisolated public var last_sms_date: String?
     @NSManaged nonisolated public var last_update_sms: String?
@@ -26,7 +27,6 @@ extension Person {
     @NSManaged nonisolated public var profile_img: String?
     @NSManaged nonisolated public var unseen_smses: Int64
     @NSManaged nonisolated public var user_id: String?
-    @NSManaged nonisolated public var is_person_viewed: Bool
     @NSManaged nonisolated public var allchats: NSSet?
 
 }
