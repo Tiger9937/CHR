@@ -62,6 +62,8 @@ class PERSON_Serv {
     func UserViewupdate(UserID:String,updateView:Bool){
         personCRUD.PERSON_Model_Update( user_id: UserID, IspersonViewed: true )
     }
+    
+    
 }
 
 
@@ -72,6 +74,8 @@ class SMS_Serv {
     // Hear i wont personis becuse person can store multiple Message including Upcoming and outgoing
     
     func addUpcomigMessages(SMS:String , time:String , SMS_Direction:MessageDirection , Personid:String){
+        
+        print(Personid)
         
         guard let personData = person.PERSON_Model_Read(user_id: Personid) else {
             print("Person not found")

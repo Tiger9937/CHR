@@ -19,7 +19,7 @@ class CHATBOARD: UIViewController {
     let internetcall                = INTERNET()
     let refreshControl              = UIRefreshControl()
     let LocalServer                 = SMS_Serv()
-    // let User_id:String usr_98312 , usr_98612
+    let User_id                     = "usr_98752"
     
     override func viewDidLoad() {
         APPCOLOR.CurrentThem()
@@ -28,8 +28,6 @@ class CHATBOARD: UIViewController {
         view.backgroundColor = APPCOLOR.BackgroundColor
         view.addSubview(LYT.USER_BNNER_LYT)
         view.addSubview(scrollLayout)
-        
-        
         SocketService.shared.connect()
         
         Auto_Page_Sizing()
@@ -183,6 +181,9 @@ class CHATBOARD: UIViewController {
     }
     
     func main() {
+       print( PERSON_CRUD().PERSON_Model_All_Person())
+        
+        
         let stack = LYT.ALLCHATS_LYT
         // this can show all the upcoming SMSes
         // structure the messages
@@ -195,12 +196,11 @@ class CHATBOARD: UIViewController {
             )
             stack.addArrangedSubview(leftrow)
             
-            // "usr_98312"
-        
             self.LocalServer.addUpcomigMessages(SMS:usermessage ,
                                            time: timeing,
                                            SMS_Direction: .incoming,
-                                           Personid: "usr_98312")
+                                           Personid: "usr_98752")
+            
         })
         
         
@@ -269,7 +269,7 @@ class CHATBOARD: UIViewController {
                             UserTextDispatchStatus: .panding)
             )
             stack.addArrangedSubview(rightrow)
-            SocketService.shared.SendMessageToOtherPerson(text, liveID: "C9_igPdVKpUR8GVVAAAH")
+            SocketService.shared.SendMessageToOtherPerson(text, liveID: "InAfBUeqBpJ2Q9QSAAAX")
         }
     }
     

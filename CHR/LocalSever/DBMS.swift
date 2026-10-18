@@ -46,7 +46,8 @@ class PERSON_CRUD{
         request.predicate = NSPredicate(format: "user_id == %@", user_id)
         do{
             let Results = try Context.fetch(request)
-            if(request.resultType.isEmpty){
+            
+            if(Results.isEmpty){
                 return nil
             }
             return Results[0]

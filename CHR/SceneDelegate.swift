@@ -23,8 +23,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // let Profile_private = PRIVATE_PROFILE_VC()
        // let Chatrequest = CHAT_REQUEST_LIST_VC()
        // let friendRequest  = FRIEND_REQUEST_LIST_VC()
-        // let ALLchats = ALLCHATS_LIST_VC()
+        // let Allperson = ALLPERSON_LIST_VC()
         let ALLuserChats = CHATBOARD()
+        
 //        let UImediaWindow = MediaWindoVC()
         // let MainWindow = ViewController()
         
