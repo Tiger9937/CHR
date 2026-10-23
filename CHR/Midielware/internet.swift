@@ -86,6 +86,41 @@ class INTERNET{
         
         return data
     }
+    
+    
+    
+    func POST(URI: String, Body: [String: Any]) async throws -> Data {
+        
+        let IsinternetOn = NetworkService.shared.Networkstatus()
+        if !IsinternetOn {
+            throw ErrorService.AllNetworkError.Usernetoff
+        }
+        
+        guard let url = URL(string: URI) else {
+            throw ErrorService.AllNetworkError.InvalidURL
+        }
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        request.httpBody = try JSONSerialization.data(withJSONObject: Body)
+        
+        let (data, response) = try await URLSession.shared.data(for: request)
+        
+        guard let httpResponse = response as? HTTPURLResponse else {
+            throw ErrorService.AllNetworkError.ServerError
+        }
+        
+        guard (200...299).contains(httpResponse.statusCode) else {
+            throw ErrorService.AllNetworkError.ServerErrorCode(
+                statusCode: httpResponse.statusCode
+            )
+        }
+        
+        return data
+    }
+
 
     
     // -> [String: [String]]

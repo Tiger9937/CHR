@@ -357,20 +357,64 @@ class USER_ACTIVITY_CNT: UIView, UITextViewDelegate {
 class USER_CHATBOARD_TEXTFILD_UPCOMING_CNT: CHATBOARD_TEXTFILD_UPCOMING_LYT {
 
     // MARK: - Subviews
+    var MessageID: UUID?
     let UserTextView = UILabel()
     let UserTextTimeView = UILabel()
     let UserTextDispatchStatusView = UIImageView()
+    func TicMark(FirstColor:UIColor , secondColor:UIColor){
+        let config = UIImage.SymbolConfiguration(
+            pointSize: 13,
+            weight: .bold
+        )
+
+        UserTextDispatchStatusView.image = UIImage(
+            systemName: "checkmark",
+            withConfiguration: config
+        )
+
+        UserTextDispatchStatusView.tintColor = secondColor
+        UserTextDispatchStatusView.contentMode = .scaleAspectFit
+
+        let secondCheckmark = UIImageView(
+            image: UIImage(
+                systemName: "checkmark",
+                withConfiguration: config
+            )
+        )
+
+        secondCheckmark.translatesAutoresizingMaskIntoConstraints = false
+        secondCheckmark.tintColor = secondColor
+        secondCheckmark.contentMode = .scaleAspectFit
+
+        BaseArea.addSubview(secondCheckmark)
+
+        NSLayoutConstraint.activate([
+            secondCheckmark.centerYAnchor.constraint(
+                equalTo: UserTextDispatchStatusView.centerYAnchor
+            ),
+
+            secondCheckmark.leadingAnchor.constraint(
+                equalTo: UserTextDispatchStatusView.trailingAnchor,
+                constant: -10
+            ),
+
+            secondCheckmark.widthAnchor.constraint(equalToConstant: 15),
+            secondCheckmark.heightAnchor.constraint(equalToConstant: 15)
+        ])
+    }
+
 
 
     // MARK: - Data
 
     struct DataClass {
-
+        var MessageID: UUID?
         var UserTextView: String
         var UserTextTimeView: String
         var UserTextDispatchStatus: StatusDispatch
 
-        init( UserTextView: String, UserTextTimeView: String, UserTextDispatchStatus: StatusDispatch ) {
+        init( MessageID:UUID, UserTextView: String, UserTextTimeView: String, UserTextDispatchStatus: StatusDispatch ) {
+            self.MessageID = MessageID
             self.UserTextView = UserTextView
             self.UserTextTimeView = UserTextTimeView
             self.UserTextDispatchStatus = UserTextDispatchStatus
@@ -417,67 +461,22 @@ class USER_CHATBOARD_TEXTFILD_UPCOMING_CNT: CHATBOARD_TEXTFILD_UPCOMING_LYT {
         UserTextTimeView.textColor = .white.withAlphaComponent(0.6)
         
         // Dipatcher Status
-        
 
-        
         AddContent(UserTextView: UserTextView,UserTextTimeView: UserTextTimeView,UserTextDispatchStatusView: UserTextDispatchStatusView)
     }
-
-
+    
     // MARK: - CNT Configur
-
     func Configur(with Data: DataClass) {
+        MessageID = Data.MessageID
         UserTextView.text = Data.UserTextView
         UserTextTimeView.text = Data.UserTextTimeView
         
-        func TicMark(FirstColor:UIColor , secondColor:UIColor){
-            let config = UIImage.SymbolConfiguration(
-                pointSize: 13,
-                weight: .bold
-            )
-
-            UserTextDispatchStatusView.image = UIImage(
-                systemName: "checkmark",
-                withConfiguration: config
-            )
-
-            UserTextDispatchStatusView.tintColor = secondColor
-            UserTextDispatchStatusView.contentMode = .scaleAspectFit
-
-            let secondCheckmark = UIImageView(
-                image: UIImage(
-                    systemName: "checkmark",
-                    withConfiguration: config
-                )
-            )
-
-            secondCheckmark.translatesAutoresizingMaskIntoConstraints = false
-            secondCheckmark.tintColor = secondColor
-            secondCheckmark.contentMode = .scaleAspectFit
-
-            BaseArea.addSubview(secondCheckmark)
-
-            NSLayoutConstraint.activate([
-                secondCheckmark.centerYAnchor.constraint(
-                    equalTo: UserTextDispatchStatusView.centerYAnchor
-                ),
-
-                secondCheckmark.leadingAnchor.constraint(
-                    equalTo: UserTextDispatchStatusView.trailingAnchor,
-                    constant: -10
-                ),
-
-                secondCheckmark.widthAnchor.constraint(equalToConstant: 15),
-                secondCheckmark.heightAnchor.constraint(equalToConstant: 15)
-            ])
-        }
 
         if StatusDispatch.delaverd == Data.UserTextDispatchStatus {
 
             TicMark(FirstColor: .ticmark, secondColor: .ticmark)
 
         } else if StatusDispatch.panding == Data.UserTextDispatchStatus {
-
             TicMark(FirstColor: .white.withAlphaComponent(0.5), secondColor: .white.withAlphaComponent(0.5))
 
         } else if StatusDispatch.notdelaverd == Data.UserTextDispatchStatus {
@@ -496,6 +495,23 @@ class USER_CHATBOARD_TEXTFILD_UPCOMING_CNT: CHATBOARD_TEXTFILD_UPCOMING_LYT {
         }
     }
     
+    // MARK: - Update
+    func UpdateDipatcherStatus(CurrentStatus:Bool){
+        if(CurrentStatus){
+            // mark deliver
+            UserTextDispatchStatusView.subviews.forEach { view in
+                view.removeFromSuperview()
+            }
+            TicMark(FirstColor: .white.withAlphaComponent(0.5), secondColor: .white.withAlphaComponent(0.5))
+        }else{
+            UserTextDispatchStatusView.subviews.forEach { view in
+                view.removeFromSuperview()
+            }
+            // still Reman NotDeliver
+            TicMark(FirstColor: .ticmark, secondColor: .ticmark)
+        }
+    }
+
     
 }
 

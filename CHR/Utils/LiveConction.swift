@@ -20,10 +20,16 @@ final class SocketService {
         )
         socket = manager.defaultSocket
     }
+    
 
     func connect() {
-        socket.on(clientEvent: .connect) { _, _ in
+        socket.on(clientEvent: .connect) {[weak self] _, _ in
             print("Socket connected")
+            
+            self!.socket.emit("C_to_S_CONCTION", [
+                "Userid":"6984fdb67e36039f498ae131"
+            ])
+            
         }
 
         socket.on(clientEvent: .disconnect) { data, _ in
@@ -36,22 +42,42 @@ final class SocketService {
 
         socket.connect()
     }
-
+    
+    // MARK: Writing (this can use as a Send Data)
     func disconnect() {
         socket.disconnect()
     }
-
-    func sendMessage(_ message: String) {
-        socket.emit("sendMessage", [
+    
+    func SendMessageToOtherPerson(MessageID:UUID, message: String , liveID:String){
+        socket.emit("C_to_C", [
+            "MessageID":"\(MessageID)",
+            "senderSocketId": liveID,
             "message": message
         ])
     }
     
-    func SendMessageToOtherPerson(_ message: String , liveID:String){
-        socket.emit("C_to_C", [
-            "senderSocketId": liveID,
-            "message": message
+    func SendMessageToServer(_ username: String) {
+        print("Ready to send SMS")
+        socket.emit("C_to_S", [
+            "Username": username,
+            "message": "Hello Server!",
+            "time": ISO8601DateFormatter().string(from: Date())
         ])
+        print("Ready to send SMS And exit")
+    }
+    
+    
+    
+    // MARK: Reading (this can use as a only to Resive data)
+    func listenMessagesFor_A_Server(OnPayloadReturn:@escaping (String) -> Void){
+        socket.on("S_to_C") { data, _ in
+            if let payloadArray = data.first as? [String: Any] {
+                let payload = payloadArray["Payload"] as? [String: Any]
+                let liveID = payload!["LiveID"] as? String
+                 OnPayloadReturn(liveID!)
+            }
+        }
+        
     }
 
     func listenMessagesFor_A_User(OnMessageReturn: @escaping (String,String)->Void ){
@@ -68,4 +94,6 @@ final class SocketService {
                 OnMessageReturn(message,time)
         }
     }
+    
+    
 }

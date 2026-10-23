@@ -74,9 +74,7 @@ class SMS_Serv {
     // Hear i wont personis becuse person can store multiple Message including Upcoming and outgoing
     
     func addUpcomigMessages(SMS:String , time:String , SMS_Direction:MessageDirection , Personid:String){
-        
-        print(Personid)
-        
+
         guard let personData = person.PERSON_Model_Read(user_id: Personid) else {
             print("Person not found")
             return
@@ -90,7 +88,31 @@ class SMS_Serv {
                                    Time_Stamp: time,
                                    PersonId: personData
         )
-        
-        print(SMS_store)
     }
+    
+    // send to the anther person anther porson i resived the sms How can i know when user click it send my message delavr to the user
+    
+    // send conction is C to C or C to s
+    
+    // if the C to C Conection are fald server take that messages and later on user online it can delaver to the message
+    
+    // when app is oppen we cal a request that get all the requested data that avable on the server
+    
+    
+    
+    func addOutgoingMessages(){
+        
+//        let SMS_store = StoreMessages.CHAT_Model_Create(id: UUID(),
+//                                   Dipatcher_Status: "",
+//                                   Last_Model_Update: Date(),
+//                                   Message_Direction:SMS_Direction.rawValue ,
+//                                   Message_Text: SMS,
+//                                   Time_Stamp: time,
+//                                   PersonId: personData
+//        )
+//        print(SMS_store)
+    }
+    
+    
+    
 }
