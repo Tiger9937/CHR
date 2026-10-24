@@ -2,7 +2,7 @@
 //  Chats+CoreDataProperties.swift
 //  CHR
 //
-//  Created by jagannath sahoo on 17/10/26.
+//  Created by jagannath sahoo on 23/10/26.
 //
 //
 
@@ -23,7 +23,7 @@ extension Chats {
     @NSManaged nonisolated public var last_model_update: Date?
     @NSManaged nonisolated public var message_direction: Int16
     @NSManaged nonisolated public var text: String?
-    @NSManaged nonisolated public var time_stamp: String?
+    @NSManaged nonisolated public var time_stamp: Date?
     @NSManaged nonisolated public var oneperson: Person?
 
 }
