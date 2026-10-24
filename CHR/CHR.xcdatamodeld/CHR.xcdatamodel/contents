@@ -6,7 +6,7 @@
         <attribute name="last_model_update" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="message_direction" optional="YES" attributeType="Integer 16" usesScalarValueType="YES"/>
         <attribute name="text" optional="YES" attributeType="String"/>
-        <attribute name="time_stamp" optional="YES" attributeType="String"/>
+        <attribute name="time_stamp" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <relationship name="oneperson" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Person" inverseName="allchats" inverseEntity="Person"/>
     </entity>
     <entity name="DataEntity" representedClassName="DataEntity" syncable="YES">

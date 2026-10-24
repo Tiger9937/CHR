@@ -190,8 +190,10 @@ class PERSON_CRUD{
         let request: NSFetchRequest<Person> = Person.fetchRequest()
 
         do {
+            
             let results = try Context.fetch(request)
             return results
+            
         } catch {
             print("Failed to fetch persons: \(error)")
             return []
@@ -248,13 +250,15 @@ class CHAT_CRUD {
                     return "Chat of this id exists"
             }
                 // 2. Create the chat
+            
+            
                 let newSMS = Chats(context: Context)
                 newSMS.id_ = id
                 newSMS.dipatcher_status = Dipatcher_Status
                 newSMS.last_model_update = Last_Model_Update
                 newSMS.message_direction = Message_Direction
                 newSMS.text = Message_Text
-                newSMS.time_stamp = Time_Stamp
+                newSMS.time_stamp = TimeDetectr().StringDateToDate(Date:Time_Stamp)
                 newSMS.oneperson = PersonId
 
                 // 3. Save
@@ -277,7 +281,7 @@ class CHAT_CRUD {
     
     
     func CHAT_Model_Update(id:UUID , Dipatcher_Status:String? = nil , Last_Model_Update:Date? = nil ,
-                           Message_Direction:Int16? = nil , Message_Text:String? = nil , Time_tamp:String? = nil
+                           Message_Direction:Int16? = nil , Message_Text:String? = nil , Time_Stamp:String? = nil
     ) throws {
         
         if let chatModelUpdate = try? fetchChat(id) {
@@ -285,7 +289,7 @@ class CHAT_CRUD {
             if let Dipatcher_Status   { chatModelUpdate.dipatcher_status = Dipatcher_Status }
             if let Message_Direction  { chatModelUpdate.message_direction = Message_Direction }
             if let Message_Text       { chatModelUpdate.text = Message_Text }
-            if let Time_tamp         { chatModelUpdate.time_stamp = Time_tamp }
+            if let Time_Stamp         { chatModelUpdate.time_stamp = TimeDetectr().StringDateToDate(Date:Time_Stamp) }
             
             chatModelUpdate.last_model_update = Last_Model_Update ?? Date()
             
@@ -316,5 +320,19 @@ class CHAT_CRUD {
         }
     }
     
+    func CHAT_Model_GetAllChatsOnPerson(Personid:String) -> [Chats]{
+        let Request: NSFetchRequest<Chats> = Chats.fetchRequest()
+        Request.predicate = NSPredicate(format: "oneperson.user_id == %@" , Personid)
+        Request.sortDescriptors = [
+            NSSortDescriptor(key: "time_stamp", ascending: true)
+        ]
+        
+        do {
+            let AllOutgoingChats = try Context.fetch(Request)
+            return AllOutgoingChats
+        } catch {
+            return []
+        }
+    }
     
 }

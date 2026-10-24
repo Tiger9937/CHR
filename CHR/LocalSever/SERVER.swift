@@ -71,7 +71,12 @@ class SMS_Serv {
     let person = PERSON_CRUD()
     let StoreMessages = CHAT_CRUD()
     
-    // Hear i wont personis becuse person can store multiple Message including Upcoming and outgoing
+    enum ChatBasketItems {
+        case ongoing(ALL_ONGOING_CHATS)
+        case upcoming(ALL_UPCOMING_CHATS)
+    }
+    var AllChatBasket: [ChatBasketItems] = []
+    
     
     func addUpcomigMessages(SMS:String , time:String , SMS_Direction:MessageDirection , Personid:String){
 
@@ -90,16 +95,6 @@ class SMS_Serv {
         )
     }
     
-    // send to the anther person anther porson i resived the sms How can i know when user click it send my message delavr to the user
-    
-    // send conction is C to C or C to s
-    
-    // if the C to C Conection are fald server take that messages and later on user online it can delaver to the message
-    
-    // when app is oppen we cal a request that get all the requested data that avable on the server
-    
-    
-    
     func addOutgoingMessages(){
         
 //        let SMS_store = StoreMessages.CHAT_Model_Create(id: UUID(),
@@ -113,6 +108,30 @@ class SMS_Serv {
 //        print(SMS_store)
     }
     
+    
+    func GetAllChats(PersonID:String)->[ChatBasketItems]{
+
+        let AllChats = StoreMessages.CHAT_Model_GetAllChatsOnPerson(Personid: PersonID)
+        for AllChat in AllChats {
+            if(AllChat.message_direction == 1){
+                let OngoingMessage = ALL_ONGOING_CHATS(id: "\(String(describing: AllChat.id_))",
+                                  Message: AllChat.text!,
+                                  DispatchTime: "\(AllChat.time_stamp!)",
+                                  DispatchStatus: StatusDispatch(rawValue: AllChat.dipatcher_status!)!,
+                                  MessageDirection: AllChat.message_direction)
+                AllChatBasket.append(.ongoing(OngoingMessage))
+                
+            }else{
+                let UpcomingChats = ALL_UPCOMING_CHATS(id: "\(String(describing: AllChat.id_))",
+                                                       Message: AllChat.text!,
+                                                       DeliveryTime: "\(AllChat.time_stamp!)",
+                                                       MessageDirection: AllChat.message_direction)
+                AllChatBasket.append(.upcoming(UpcomingChats))
+            }
+        }
+        
+        return AllChatBasket
+    }
     
     
 }

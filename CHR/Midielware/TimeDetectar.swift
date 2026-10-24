@@ -35,5 +35,13 @@ class TimeDetectr{
         
         
     }
+    
+    func StringDateToDate(Date: String) -> Date? {
+        let formatter = ISO8601DateFormatter()
+        formatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
+
+        return formatter.date(from: Date)
+    }
 }
+
 

@@ -256,7 +256,7 @@ class CHATBOARD: UIViewController {
         let stack = LYT.ALLCHATS_LYT
         // this can show all the upcoming SMSes
         // structure the messages
-        
+        DisplayAllChats(stack: stack)
         
         
     
@@ -275,12 +275,6 @@ class CHATBOARD: UIViewController {
                                            Personid: "usr_98752")
             
         })
-        
-        
-       
-        
-
-
         
         
         
@@ -370,7 +364,26 @@ class CHATBOARD: UIViewController {
         }
     }
     
-    // CurrentDelavaryStatus.data.isMessageStoreServer
-    
+    func DisplayAllChats(stack:UIStackView){
+        let AllChats_Basket = LocalServer.GetAllChats(PersonID: User_Name)
+        
+        for Chat in AllChats_Basket {
+            switch Chat {
+            case .ongoing(let Message):
+                let Ongoing_SMS = USER_CHATBOARD_TEXTFILD_ONGOING_CNT(data: .init(MessageID: UUID(uuidString: Message.id)!,
+                                                                                  UserTextView: Message.Message,
+                                                                                  UserTextTimeView: Message.DispatchTime,
+                                                                                  UserTextDispatchStatus: Message.DispatchStatus)
+                )
+                stack.addArrangedSubview(Ongoing_SMS)
+            case .upcoming(let Message):
+                let Upcoming_SMS = USER_CHATBOARD_TEXTFILD_UPCOMING_CNT(data: .init(UserTextView: Message.Message, UserTextTimeView: Message.DeliveryTime))
+                stack.addArrangedSubview(Upcoming_SMS)
+            }
+        }
+        
+        
+        
+    }
 }
 
