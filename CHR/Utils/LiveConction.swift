@@ -1,5 +1,5 @@
 
-import Foundation
+internal import Foundation
 import SocketIO
 
 final class SocketService {
@@ -48,11 +48,12 @@ final class SocketService {
         socket.disconnect()
     }
     
-    func SendMessageToOtherPerson(MessageID:UUID, message: String , liveID:String){
+    func SendMessageToOtherPerson(MessageID:UUID, message: String , liveID:String , Time:String){
         socket.emit("C_to_C", [
             "MessageID":"\(MessageID)",
             "senderSocketId": liveID,
-            "message": message
+            "message": message,
+            "date": Time
         ])
     }
     
@@ -87,10 +88,8 @@ final class SocketService {
                 }
             
                 let message = response["message"] as? String ?? ""
-                let time = response["time"] as? String ?? ""
+                let time = response["Date"] as? String ?? ""
 
-               
-            
                 OnMessageReturn(message,time)
         }
     }

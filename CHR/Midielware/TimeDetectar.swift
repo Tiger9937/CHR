@@ -5,7 +5,7 @@ class TimeDetectr{
     var calendar = Calendar.current
      
     
-    func FindCurrentTime(_ TimeWIthString:String? , DateWithDateFormat:Date?)->String?{
+    func FindCurrentTime(TimeWIthString:String? , DateWithDateFormat:Date?)->String?{
         let formatter = ISO8601DateFormatter()
         formatter.formatOptions = [
             .withInternetDateTime,
@@ -37,10 +37,24 @@ class TimeDetectr{
     }
     
     func StringDateToDate(Date: String) -> Date? {
+        
         let formatter = ISO8601DateFormatter()
         formatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
 
         return formatter.date(from: Date)
+    }
+    
+    
+    func GenerateDate() -> String {
+        let formatter = ISO8601DateFormatter()
+
+        formatter.formatOptions = [
+            .withInternetDateTime,
+            .withFractionalSeconds
+        ]
+
+        formatter.timeZone = TimeZone(secondsFromGMT: 0)
+        return formatter.string(from: Date())
     }
 }
 

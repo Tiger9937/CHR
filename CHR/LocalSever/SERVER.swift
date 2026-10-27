@@ -78,14 +78,14 @@ class SMS_Serv {
     var AllChatBasket: [ChatBasketItems] = []
     
     
-    func addUpcomigMessages(SMS:String , time:String , SMS_Direction:MessageDirection , Personid:String){
+    func addUpcomigMessages(SMS:String , time:String , SMS_Direction:MessageDirection , Personid:String , SMS_ID:UUID){
 
         guard let personData = person.PERSON_Model_Read(user_id: Personid) else {
             print("Person not found")
             return
         }
         
-        let SMS_store = StoreMessages.CHAT_Model_Create(id: UUID(),
+        StoreMessages.CHAT_Model_Create(id: SMS_ID,
                                    Dipatcher_Status: "",
                                    Last_Model_Update: Date(),
                                    Message_Direction:SMS_Direction.rawValue ,
@@ -93,42 +93,60 @@ class SMS_Serv {
                                    Time_Stamp: time,
                                    PersonId: personData
         )
-    }
-    
-    func addOutgoingMessages(){
         
-//        let SMS_store = StoreMessages.CHAT_Model_Create(id: UUID(),
-//                                   Dipatcher_Status: "",
-//                                   Last_Model_Update: Date(),
-//                                   Message_Direction:SMS_Direction.rawValue ,
-//                                   Message_Text: SMS,
-//                                   Time_Stamp: time,
-//                                   PersonId: personData
-//        )
-//        print(SMS_store)
+    }
+    
+    func addOutgoingMessages(SMS:String  , time:String , Personid:String , SMS_Direction:MessageDirection , Dipatcher_Status_INFO:StatusDispatch , SMS_ID:UUID){
+        
+//        let persons = person.PERSON_Model_All_Person()
+        
+        guard let person_ID = person.PERSON_Model_Read(user_id: Personid) else {
+            print("Person not found")
+            return
+        }
+        
+        print("New Time",time)
+        
+        let SMS_store = StoreMessages.CHAT_Model_Create(id:SMS_ID,
+                                   Dipatcher_Status: Dipatcher_Status_INFO.rawValue,
+                                   Last_Model_Update: Date(),
+                                   Message_Direction:SMS_Direction.rawValue ,
+                                   Message_Text: SMS,
+                                   Time_Stamp: time,
+                                   PersonId: person_ID
+        )
+        print("SMS:ST",SMS_store)
     }
     
     
-    func GetAllChats(PersonID:String)->[ChatBasketItems]{
-
+    func GetAllChats(PersonID:String)->[ChatBasketItems]{ 
+        
+        let timeDetect =  TimeDetectr()
         let AllChats = StoreMessages.CHAT_Model_GetAllChatsOnPerson(Personid: PersonID)
-        for AllChat in AllChats {
-            if(AllChat.message_direction == 1){
-                let OngoingMessage = ALL_ONGOING_CHATS(id: "\(String(describing: AllChat.id_))",
-                                  Message: AllChat.text!,
-                                  DispatchTime: "\(AllChat.time_stamp!)",
-                                  DispatchStatus: StatusDispatch(rawValue: AllChat.dipatcher_status!)!,
-                                  MessageDirection: AllChat.message_direction)
-                AllChatBasket.append(.ongoing(OngoingMessage))
-                
-            }else{
-                let UpcomingChats = ALL_UPCOMING_CHATS(id: "\(String(describing: AllChat.id_))",
-                                                       Message: AllChat.text!,
-                                                       DeliveryTime: "\(AllChat.time_stamp!)",
-                                                       MessageDirection: AllChat.message_direction)
-                AllChatBasket.append(.upcoming(UpcomingChats))
+        
+        if (AllChats == []) {
+            
+        }else{
+            for AllChat in AllChats {
+                if(AllChat.message_direction == 1){
+                    let OngoingMessage = ALL_ONGOING_CHATS(id: "\(AllChat.id_!)",
+                                      Message: AllChat.text!,
+                                                           DispatchTime: "\(timeDetect.FindCurrentTime(TimeWIthString:nil , DateWithDateFormat:AllChat.time_stamp) ?? "Date Not found")",
+                                      DispatchStatus: StatusDispatch(rawValue: AllChat.dipatcher_status!)!,
+                                      MessageDirection: AllChat.message_direction)
+                    AllChatBasket.append(.ongoing(OngoingMessage))
+                    
+                }else{
+                    let UpcomingChats = ALL_UPCOMING_CHATS(id: "\(AllChat.id_!)",
+                                                           Message: AllChat.text!,
+                                                           DeliveryTime: "\(timeDetect.FindCurrentTime(TimeWIthString:nil , DateWithDateFormat:AllChat.time_stamp) ?? "Date Not found")",
+                                                           MessageDirection: AllChat.message_direction)
+                    AllChatBasket.append(.upcoming(UpcomingChats))
+                }
             }
         }
+
+        
         
         return AllChatBasket
     }

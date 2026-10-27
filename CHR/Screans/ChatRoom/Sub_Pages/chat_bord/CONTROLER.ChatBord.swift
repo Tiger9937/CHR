@@ -19,8 +19,9 @@ class CHATBOARD: UIViewController {
     let internetcall                = INTERNET()
     let refreshControl              = UIRefreshControl()
     let LocalServer                 = SMS_Serv()
-    var User_Name                     = "alex_morgan"
-    var User_id                     = ""
+    var User_Name                     = "rohit_saho"
+    var User_id                     = "6984fdb67e36039f498ae131"
+    var User_LIVE_ID:String = ""
     
     override func viewDidLoad() {
         APPCOLOR.CurrentThem()
@@ -32,7 +33,7 @@ class CHATBOARD: UIViewController {
         
         SocketService.shared.connect()
         SocketService.shared.listenMessagesFor_A_Server(OnPayloadReturn: { [self]UserLiveID in
-            User_id = UserLiveID
+            User_LIVE_ID = UserLiveID
         })
         
         // give to the username to find is user is concted or not
@@ -219,7 +220,7 @@ class CHATBOARD: UIViewController {
                                                              liveID: response.data.ClintLiveID,
                                                              lastActiveTime: response.data.ClintLastActivTime)
                     await MainActor.run {
-                        CurrentActiveStatus = TimeDetectr().FindCurrentTime(response.data.ClintLastActivTime, DateWithDateFormat: nil) ?? "Time not Detectr"
+                        CurrentActiveStatus = TimeDetectr().FindCurrentTime(TimeWIthString: response.data.ClintLastActivTime, DateWithDateFormat: nil) ?? "Time not Detectr"
                     }
                 }
             }
@@ -246,10 +247,8 @@ class CHATBOARD: UIViewController {
     
     
     func main() {
+        // CHAT_CRUD().CHAT_Model_Deleted_ALL_CHATS()
         // Hear write a program that make the All panding smses into the delavary
-        
-        
-        
         
 //       print( PERSON_CRUD().PERSON_Model_All_Person())
         
@@ -258,65 +257,20 @@ class CHATBOARD: UIViewController {
         // structure the messages
         DisplayAllChats(stack: stack)
         
-        
-    
-        
-        SocketService.shared.listenMessagesFor_A_User(OnMessageReturn: { usermessage,timeing  in
-            let leftrow = USER_CHATBOARD_TEXTFILD_ONGOING_CNT(
-                data: .init(UserTextView: usermessage,
-                            UserTextTimeView: TimeDetectr().FindCurrentTime(timeing,DateWithDateFormat: nil)!
-                           )
-            )
+        SocketService.shared.listenMessagesFor_A_User(OnMessageReturn: { usermessage, timeing  in
+            let SMS_ID = UUID()
+            let leftrow = USER_CHATBOARD_TEXTFILD_UPCOMING_CNT(data: .init(
+                UserTextView: usermessage,
+                UserTextTimeView: timeing
+            ))
             stack.addArrangedSubview(leftrow)
-
-            self.LocalServer.addUpcomigMessages(SMS:usermessage ,
-                                           time: timeing,
-                                           SMS_Direction: .incoming,
-                                           Personid: "usr_98752")
             
-        })
-        
-        
-        
-//        let sampleTexts = [
-//            "Hey, are you free this evening?",
-//            "Just finished the login screen, it's working now.",
-//            "Can you send me the design files when you get a chance?",
-//            "Lunch at 2? I'm craving biryani.",
-//            "The build failed again. Looks like a missing constraint.",
-//            "Happy birthday! Hope you have an amazing day.",
-//            "I'll call you in 10 minutes, I'm stuck in traffic right now and the signal keeps dropping.",
-//            "Did you see the new iOS update? Some of the animations feel much smoother.",
-//            "Okay, sounds good.",
-//            "Let's meet tomorrow morning to go over the project plan, the deadline is closer than we thought, so we should split the tasks today."
-//        ]
-//
-//        func randomDateString() -> String {
-//            let day = Int.random(in: 1...28)
-//            let month = Int.random(in: 1...12)
-//            let year = Int.random(in: 2020...2026)
-//            return String(format: "%02d/%02d/%d", day, month, year)
-//        }
-//
-//        for _ in 0..<5 {
-//            let leftrow = USER_CHATBOARD_TEXTFILD_ONGOING_CNT(
-//                data: .init(UserTextView: sampleTexts.randomElement()!,
-//                            UserTextTimeView: randomDateString())
-//            )
-//
-
-//
-//            [leftrow, rightrow].forEach {
-//                $0.translatesAutoresizingMaskIntoConstraints = false
-//                stack.addArrangedSubview($0)
-//            }
-//        }
-        
-        // -> Respos Back system
-        
-        // -> Delaver if user senn it
-        // -> panding -> if user concted with interner / can is conc
-        // ->
+            self.LocalServer.addUpcomigMessages(SMS:usermessage ,
+                                                time: TimeDetectr().FindCurrentTime(TimeWIthString: timeing, DateWithDateFormat: nil) ?? "Date Not found",
+                                                SMS_Direction: .incoming,
+                                                Personid: "6984fdb67e36039f498ae131", SMS_ID: SMS_ID)
+            
+         })
         
         let bar = USER_ACTIVITY_CNT(data: .init(Username: "Jagan", ProfileImg: UIImage(), CurrentStatus: ""))
         bar.translatesAutoresizingMaskIntoConstraints = false
@@ -329,20 +283,30 @@ class CHATBOARD: UIViewController {
             bar.bottomAnchor.constraint(equalTo: view.keyboardLayoutGuide.topAnchor, constant: -8),
         ])
 
-        bar.onSendTapped = { text in
+        bar.onSendTapped = { [self] text in
             let MessageID = UUID()
-            let rightrow = USER_CHATBOARD_TEXTFILD_UPCOMING_CNT(
+            let rightrow = USER_CHATBOARD_TEXTFILD_ONGOING_CNT(
                 data: .init(MessageID: MessageID,
                             UserTextView: text,
-                            UserTextTimeView: TimeDetectr().FindCurrentTime(nil, DateWithDateFormat: Date())!,
+                            UserTextTimeView: TimeDetectr().FindCurrentTime(TimeWIthString: nil, DateWithDateFormat: Date())!,
                             UserTextDispatchStatus: .notdelaverd)
             )
             stack.addArrangedSubview(rightrow)
             
-            
-            
-            if(CLIENT_LIVE_STATUS_INFO.shared.GetClientData().isOnline){
-                SocketService.shared.SendMessageToOtherPerson(MessageID: MessageID,message: text, liveID: "InAfBUeqBpJ2Q9QSAAAX")
+            if( CLIENT_LIVE_STATUS_INFO.shared.GetClientData().isOnline
+                
+            ){
+                SocketService.shared.SendMessageToOtherPerson(MessageID: MessageID,message: text, liveID: "v9RJExt7QcZ6PC1_AAAF", Time: TimeDetectr().GenerateDate())
+                
+                self.LocalServer.addOutgoingMessages(SMS: text,
+                                                time: TimeDetectr().GenerateDate(),
+                                                Personid: User_id,
+                                                SMS_Direction: .outgoing,
+                                                Dipatcher_Status_INFO: .panding,
+                                                SMS_ID: MessageID
+                )
+                // later on apply a Respons Back to know the current status of the message
+                
             }else{
                 Task {
                     let delivery = await self.Fetch_isMessageStore_ServerOnline(
@@ -351,22 +315,30 @@ class CHATBOARD: UIViewController {
                     )
 
                     guard let delivery, let messageView = stack.arrangedSubviews
-                            .compactMap({ $0 as? USER_CHATBOARD_TEXTFILD_UPCOMING_CNT })
+                            .compactMap({ $0 as? USER_CHATBOARD_TEXTFILD_ONGOING_CNT })
                             .first(where: { $0.MessageID == UUID(uuidString: delivery.data.Messageid) })
                     else { return }
                     
+                    // this change for instendly
                     messageView.UpdateDipatcherStatus(
                         CurrentStatus: delivery.data.isMessageStoreServer
                     )
                     
+                    self.LocalServer.addOutgoingMessages( SMS: text, time: TimeDetectr().GenerateDate(), Personid: User_id, SMS_Direction: .outgoing, Dipatcher_Status_INFO: (delivery.data.isMessageStoreServer) ? .panding : .notdelaverd,
+                        SMS_ID: MessageID
+                    )
                 }
             }
         }
+        
+        
+        
     }
     
     func DisplayAllChats(stack:UIStackView){
-        let AllChats_Basket = LocalServer.GetAllChats(PersonID: User_Name)
         
+        let AllChats_Basket = LocalServer.GetAllChats(PersonID: User_id)
+                
         for Chat in AllChats_Basket {
             switch Chat {
             case .ongoing(let Message):
@@ -376,6 +348,7 @@ class CHATBOARD: UIViewController {
                                                                                   UserTextDispatchStatus: Message.DispatchStatus)
                 )
                 stack.addArrangedSubview(Ongoing_SMS)
+                
             case .upcoming(let Message):
                 let Upcoming_SMS = USER_CHATBOARD_TEXTFILD_UPCOMING_CNT(data: .init(UserTextView: Message.Message, UserTextTimeView: Message.DeliveryTime))
                 stack.addArrangedSubview(Upcoming_SMS)
@@ -385,5 +358,11 @@ class CHATBOARD: UIViewController {
         
         
     }
+    
+    // I put some Upcoming and outgoing data inside the iphon and get all thous Data
+    //and display it
+    
+    // make two diffrent diffrent phon one is send sms and anter one is Resive it and bothe are store Data On ther phon
+    // When the page is oppen All thous data showing the user Based on the user
 }
 

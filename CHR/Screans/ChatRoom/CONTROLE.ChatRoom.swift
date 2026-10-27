@@ -274,7 +274,7 @@ class ALLPERSON_LIST_VC: UIViewController {
         let ChatRoomUser = ChatRoomUser(
             data: .init(
                 Username: Username,
-                Time: timeDetect.FindCurrentTime(Time, DateWithDateFormat: nil)!,
+                Time: timeDetect.FindCurrentTime(TimeWIthString: Time, DateWithDateFormat: nil)!,
                 ProfileImg:profileImageDetector(path: avatar),
                 RecentSMS: RecentSMS,
                 NuberofUnseenSMS:String(NuberofUnseenSMS)
@@ -294,9 +294,7 @@ class ALLPERSON_LIST_VC: UIViewController {
                     MidViewLYT.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
                     MidViewLYT.trailingAnchor.constraint(equalTo: self.view.trailingAnchor)
                 ])
-                
-                let myUI = UIView()
-                
+                                
                 let ImgView = ChatRoomUserProfileImgMID_VIEW()
                     .Mid_imgviewPass(
                         FullImg: profileImageDetector(path: avatar)
