@@ -24,14 +24,15 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
        // let Chatrequest = CHAT_REQUEST_LIST_VC()
        // let friendRequest  = FRIEND_REQUEST_LIST_VC()
         // let Allperson = ALLPERSON_LIST_VC()
-        let ALLuserChats = CHATBOARD()
+        // let ALLuserChats = CHATBOARD()
+        let userSingin = SINGIN_VC()
         
 //        let UImediaWindow = MediaWindoVC()
         // let MainWindow = ViewController()
         
        // window?.rootViewController = REDwin
 //        window?.rootViewController = UIChatWindow
-        window?.rootViewController = ALLuserChats
+        window?.rootViewController = userSingin
         
 
         

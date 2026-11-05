@@ -30,10 +30,10 @@ class APPCOLOR{
     }
     
     static func CurrentThem() {
-        if(UITraitCollection.current.userInterfaceStyle == .light){
+        if(UITraitCollection.current.userInterfaceStyle == .dark){
             Islight = true
             DefaultTheme()
-        }else if (UITraitCollection.current.userInterfaceStyle == .dark){
+        }else if (UITraitCollection.current.userInterfaceStyle == .light){
             Islight = false
             DarkTheme()
         }
